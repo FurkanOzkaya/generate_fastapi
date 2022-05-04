@@ -1,0 +1,10 @@
+import os
+
+prefix = "/api/v1"
+
+MONGO_HOST = os.getenv("MONGO_HOST", "127.0.0.1")
+MONGO_PORT = os.getenv("MONGO_PORT", 27017)
+MONGO_INITDB_ROOT_USERNAME = os.getenv('MONGO_INITDB_ROOT_USERNAME', '')
+MONGO_INITDB_ROOT_PASSWORD = os.getenv('MONGO_INITDB_ROOT_PASSWORD', '')
+
+DATABASE_NAME = os.getenv("DATABASE_NAME", "dbname")

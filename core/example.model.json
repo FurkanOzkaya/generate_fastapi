@@ -1,0 +1,24 @@
+[
+    {
+        "model_name": "ExampleModel",
+        "url": "example",
+        "collection": "example",
+        "args": [
+            {
+                "name": "username",
+                "required": false,
+                "type": "str"
+            },
+            {
+                "name": "email",
+                "required": true,
+                "type": "EmailStr"
+            },
+            {
+                "name": "create_date",
+                "required": false,
+                "type": "datetime"
+            }
+        ]
+    }
+]
