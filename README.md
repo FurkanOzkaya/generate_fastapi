@@ -30,6 +30,17 @@ python api_generator.py
 
 This file will generate dist file you can open that file and run your fastapi app.
 
+- You can use vscode task and launch part. 
+
+```
+click ctrl + shift + b for create virtualenv with requirements.
+```
+
+```
+Click vscode Launch section to run app.
+```
+
+
 Don't you know how to run FastAPI app. Visit this page [FastApi](https://fastapi.tiangolo.com/tutorial/)
 
 

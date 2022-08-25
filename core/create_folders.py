@@ -19,12 +19,16 @@ def create_folder_structure():
 
     logger.info("Cleaning workspace folder 'dist' Please check if you have this folder")
     time.sleep(5)
-    shutil.rmtree(dist_folder)
+    try:
+        shutil.rmtree(dist_folder)
+    except Exception as err:
+        logger.info("Folder Not Found Continue to create")
 
     logger.info("Creating Folders")
 
     folders = [
         dist_folder,
+        vscode_folder,
         database_folder,
         models_folder,
         configs_folder,
@@ -56,12 +60,18 @@ def create_folder_structure():
     exceptions_file = os.path.join(common_files_path, "exceptions.py")
     mongodb_functions_file = os.path.join(common_files_path, "mongodb_functions.py")
     singleton_file = os.path.join(common_files_path, "singleton.py")
+    requirement_file = os.path.join(common_files_path, "requirements.txt")
+    launch_json_file = os.path.join(common_files_path, "vscode_configs", "launch.json")
+    task_json_file = os.path.join(common_files_path, "vscode_configs", "tasks.json")
 
     shutil.copy(common_functions_file, utils_folder)
     shutil.copy(exceptions_file, utils_folder)
     shutil.copy(singleton_file, utils_folder)
     shutil.copy(config_file, configs_folder)
     shutil.copy(mongodb_functions_file, database_folder)
+    shutil.copy(requirement_file, dist_folder)
+    shutil.copy(launch_json_file, vscode_folder)
+    shutil.copy(task_json_file, vscode_folder)
 
     logger.info("Creating Folder Structure is Finished")
     logger.info("="*10)
