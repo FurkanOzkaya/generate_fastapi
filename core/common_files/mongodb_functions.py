@@ -78,3 +78,8 @@ class MongoDB(metaclass=Singleton):
         new_data = {"$push": data}
         result = self.collection.update_one(query, new_data)
         return result.matched_count > 0
+
+    def delete_one(self, id):
+        query = {"_id": ObjectId(id)}
+        result = self.collection.delete_one(query)
+        return result.deleted_count > 0

@@ -47,7 +47,7 @@ Don't you know how to run FastAPI app. Visit this page [FastApi](https://fastapi
 ## TO DO
  - TAG Support.
  - Model Seperation for update.
- - Add Delete Support
+ - ~~Add Delete Support~~
  - Add Soft Delete Support
  - UI Support.
  - Add More Option.

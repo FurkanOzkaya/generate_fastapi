@@ -1,5 +1,12 @@
 import os
 import json
+import logging
+logger = logging.getLogger(__name__)
+formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(name)s - %(process)d | %(message)s',)
+handler = logging.StreamHandler()
+handler.setFormatter(formatter)
+logger.setLevel(logging.INFO)
+logger.addHandler(handler)
 
 
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))

@@ -30,9 +30,9 @@ def main(model_name, url, collection_name):
     code = Code("router = APIRouter()", [CodeBreak()])
 
     # Get All
-    code += Code(f"""@router.get("/{url}/", 
-                responses={{200: {{"model": {model_name} }}, 
-                       204: {{"desciption": "No Data"}}, 
+    code += Code(f"""@router.get("/{url}/",
+                responses={{200: {{"model": {model_name} }},
+                       204: {{"desciption": "No Data"}},
                        400: {{"description": "Bad Request Please check data."}},
                        422: {{"description": "RESPONSE NOT USED"}},
                        500: {{"description": "Internal Server Error"}}}})""")
@@ -124,6 +124,32 @@ def main(model_name, url, collection_name):
     inner_code.append(Code('return JSONResponse(status_code=status.HTTP_200_OK, content={"status": "SUCCESS"})'))
 
     code += CodeBlock(f"def put(response: Response, id: str, content: {model_name})", inner_code)
+    code += CodeBreak()
+
+    code += Code(f"""@router.delete("/{url}/",
+            responses={{200: {{"description": "Deleted Successfully"}},
+                       400: {{"description": "Bad Request Please check data."}},
+                       422: {{"description": "RESPONSE NOT USED"}},
+                       500: {{"description": "Internal Server Error"}}}})""")
+    inner_code = []
+    inner_code.append(Code("client = MongoDB()"))
+    inner_code.append(Code(f'client.connect_collection("{collection_name}")'))
+    inner_code.append(
+        CodeBlock(
+            "try",
+            ["res = client.delete_one(id)",
+             CodeBlock(
+                 "if res", ['return JSONResponse(status_code=status.HTTP_200_OK, content={"status": "SUCCESS"})']),
+             CodeBlock(
+                 "else",
+                 ['return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content={"status": "Doesn\'t Exist"})'])]))
+    inner_code.append(
+        CodeBlock(
+            "except Exception as err",
+            ['return JSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"error": f"{err}"})']))
+    inner_code.append(Code('return JSONResponse(status_code=status.HTTP_200_OK, content={"status": "SUCCESS"})'))
+
+    code += CodeBlock(f"def delete(response: Response, id: str)", inner_code)
     code += CodeBreak()
 
     return imports + code
